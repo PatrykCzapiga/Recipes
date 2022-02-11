@@ -37,7 +37,7 @@ public class RecipeController {
 
     @PutMapping("/api/recipe/{id}")
     public void updateRecipe(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(value = "id") Long id, @Valid @RequestBody RecipeDto recipeDto) {
-        if(userDetails!=null) {
+        if (userDetails != null) {
             try {
                 recipeDto.setId(id);
                 if (recipeService.update(RecipeMapper.toRecipe(recipeDto, 0), userDetails)) {
@@ -85,7 +85,7 @@ public class RecipeController {
 
     @DeleteMapping("/api/recipe/{id}")
     public void deleteRecipe(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
-        if(userDetails!=null) {
+        if (userDetails != null) {
             try {
                 if (recipeService.delete(id, userDetails)) {
                     throw new ResponseStatusException(HttpStatus.NO_CONTENT);

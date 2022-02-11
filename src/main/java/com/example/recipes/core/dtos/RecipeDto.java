@@ -3,8 +3,10 @@ package com.example.recipes.core.dtos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,7 +21,7 @@ public class RecipeDto {
     @NotBlank
     private String description;
     @NotEmpty
-    private String[] ingredients;
+    private List<String> ingredients;
     @NotEmpty
-    private String[] directions;
+    private List<String> directions;
 }

@@ -3,45 +3,47 @@ package com.example.recipes.core.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
 @Entity
-@Table(name="RECIPE")
+@Table(name = "RECIPE")
 public class Recipe {
 
-        @Id
-        @GeneratedValue (strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @Column
-        private String name;
+    @Column
+    private String name;
 
-        @Column
-        private String category;
+    @Column
+    private String category;
 
-        @Column
-        private LocalDateTime date;
+    @Column
+    private LocalDateTime date;
 
-        @Column
-        private String description;
+    @Column
+    private String description;
 
-        @Column
-        private String ingredients;
+    @ElementCollection
+    private List<String> ingredients;
 
-        @Column
-        private String directions;
+    @ElementCollection
+    private List<String> directions;
 
-        @ManyToOne
-        @JoinTable(name="USERRECIPE",
-                joinColumns = @JoinColumn(name="id"),
-                inverseJoinColumns = @JoinColumn(name="userId")
-        )
-        private User user;
+    @ManyToOne
+    @JoinTable(name = "USERRECIPE",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "userId")
+    )
+    private User user;
 
 }

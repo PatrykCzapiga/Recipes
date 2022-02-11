@@ -6,12 +6,12 @@ import com.example.recipes.core.entities.User;
 import com.example.recipes.infrastructure.repositories.UserRepository;
 
 @Component
-public class UserSaveIfNotDuplicate{
-@Autowired
-UserRepository userRepo;
+public class UserSaveIfNotDuplicate {
+    @Autowired
+    UserRepository userRepo;
 
     public boolean saveIfNotDuplicate(User user) {
-        if(userRepo.existsUserByEmail(user.getEmail())){
+        if (userRepo.existsUserByEmail(user.getEmail())) {
             return false;
         }
         userRepo.save(user);

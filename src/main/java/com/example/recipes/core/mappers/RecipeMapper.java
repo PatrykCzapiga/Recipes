@@ -1,18 +1,18 @@
 package com.example.recipes.core.mappers;
 
-import org.springframework.stereotype.Component;
 import com.example.recipes.api.dtos.RecipeResponseDto;
+import org.springframework.stereotype.Component;
 import com.example.recipes.core.dtos.RecipeDto;
 import com.example.recipes.core.entities.Recipe;
 import com.example.recipes.core.entities.User;
+
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 @Component
 public class RecipeMapper {
 
     public static Recipe toRecipe(RecipeDto recipeDto, long userId) {
-        StringBuilder sbIngredients = new StringBuilder();
+        /*StringBuilder sbIngredients = new StringBuilder();
         for(int i = 0; i<recipeDto.getIngredients().length; i++)
         {
             sbIngredients.append(recipeDto.getIngredients()[i]);
@@ -24,21 +24,21 @@ public class RecipeMapper {
             sbDirections.append(recipeDto.getDirections()[i]);
             sbDirections.append(",, ");
         }
-        return new Recipe(recipeDto.getId(), recipeDto.getName(), recipeDto.getCategory(), LocalDateTime.now() , recipeDto.getDescription(),
-                sbIngredients.toString(),sbDirections.toString(), new User(userId, "", "", ""));
+        */
+        return new Recipe(recipeDto.getId(), recipeDto.getName(), recipeDto.getCategory(), LocalDateTime.now(), recipeDto.getDescription(),
+                recipeDto.getIngredients(), recipeDto.getDirections(), new User(userId, "", "", ""));
     }
 
     public static RecipeDto toRecipeDto(Recipe recipe) {
         return new RecipeDto(recipe.getId(), recipe.getName(), recipe.getCategory(), recipe.getDescription(),
-                recipe.getIngredients().split(",, "), recipe.getDirections().split(",, "));
-
+                recipe.getIngredients(), recipe.getDirections());
     }
 
     public static RecipeResponseDto toRecipeResponseDto(Recipe recipe) {
         return new RecipeResponseDto(recipe.getName(), recipe.getCategory(), recipe.getDate(), recipe.getDescription(),
-                Arrays.asList(recipe.getIngredients().split(",, ")), Arrays.asList(recipe.getDirections().split(",, ")));
-
+                recipe.getIngredients(), recipe.getDirections());
     }
+
     public static Recipe mapToRecipe(Recipe recipe, Recipe recipe2) {
         recipe.setId(recipe2.getId());
         recipe.setName(recipe2.getName());
@@ -49,5 +49,4 @@ public class RecipeMapper {
         recipe.setDirections(recipe2.getDirections());
         return recipe;
     }
-
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.example.recipes.core.entities.Recipe;
 import com.example.recipes.core.mappers.RecipeMapper;
 import com.example.recipes.infrastructure.repositories.RecipeRepository;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class RecipeService {
     }
 
     public boolean update(Recipe recipe, UserDetailsImpl userDetails) {
-        Recipe dbRecipe=recipeRepository.findById(recipe.getId()).get();
-        if(dbRecipe.getUser().getUserId()== userDetails.getUserId()) {
+        Recipe dbRecipe = recipeRepository.findById(recipe.getId()).get();
+        if (dbRecipe.getUser().getUserId() == userDetails.getUserId()) {
             recipe.getUser().setUserId(userDetails.getUserId());
             dbRecipe.setDate(LocalDateTime.now());
             recipeRepository.save(RecipeMapper.mapToRecipe(dbRecipe, recipe));
@@ -36,17 +37,17 @@ public class RecipeService {
         return false;
     }
 
-    public List<Recipe> searchByCategory(String category){
+    public List<Recipe> searchByCategory(String category) {
         return recipeRepository.findByCategoryIgnoreCaseOrderByDateDesc(category);
     }
 
-    public List<Recipe> searchByName(String str){
+    public List<Recipe> searchByName(String str) {
         return recipeRepository.findByNameContainsIgnoreCaseOrderByDateDesc(str);
     }
 
     public boolean delete(Long id, UserDetailsImpl userDetails) {
-        Recipe dbRecipe=recipeRepository.findById(id).get();
-        if(dbRecipe.getUser().getUserId()== userDetails.getUserId()) {
+        Recipe dbRecipe = recipeRepository.findById(id).get();
+        if (dbRecipe.getUser().getUserId() == userDetails.getUserId()) {
             recipeRepository.deleteById(id);
             return true;
         }
