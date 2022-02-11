@@ -12,19 +12,6 @@ import java.time.LocalDateTime;
 public class RecipeMapper {
 
     public static Recipe toRecipe(RecipeDto recipeDto, long userId) {
-        /*StringBuilder sbIngredients = new StringBuilder();
-        for(int i = 0; i<recipeDto.getIngredients().length; i++)
-        {
-            sbIngredients.append(recipeDto.getIngredients()[i]);
-            sbIngredients.append(",, ");
-        }
-        StringBuilder sbDirections = new StringBuilder();
-        for(int i = 0; i<recipeDto.getDirections().length; i++)
-        {
-            sbDirections.append(recipeDto.getDirections()[i]);
-            sbDirections.append(",, ");
-        }
-        */
         return new Recipe(recipeDto.getId(), recipeDto.getName(), recipeDto.getCategory(), LocalDateTime.now(), recipeDto.getDescription(),
                 recipeDto.getIngredients(), recipeDto.getDirections(), new User(userId, "", "", ""));
     }
