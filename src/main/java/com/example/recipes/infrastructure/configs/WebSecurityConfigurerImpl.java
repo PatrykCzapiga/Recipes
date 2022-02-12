@@ -28,10 +28,16 @@ public class WebSecurityConfigurerImpl extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
+                .mvcMatchers("/h2").permitAll()
                 .mvcMatchers("/api/recipes/*").hasRole("USER")
-                .mvcMatchers("/**").permitAll()
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .formLogin()
+                .usernameParameter("email")
+                .defaultSuccessUrl("/index.html")
+                .permitAll()
+                .and();
         http.headers().frameOptions().disable();
 
 
