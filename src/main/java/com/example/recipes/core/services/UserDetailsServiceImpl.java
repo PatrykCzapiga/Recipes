@@ -33,4 +33,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return new UserDetailsImpl(user);
     }
+
+    public boolean saveIfNotDuplicate(User user) {
+        if (userRepo.existsUserByEmail(user.getEmail())) {
+            return false;
+        }
+        userRepo.save(user);
+        return true;
+    }
 }

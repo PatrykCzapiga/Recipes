@@ -1,5 +1,6 @@
 package com.example.recipes.api.controllers;
 
+import com.example.recipes.core.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import com.example.recipes.core.entities.User;
-import com.example.recipes.core.services.UserSaveIfNotDuplicate;
 import com.example.recipes.infrastructure.repositories.UserRepository;
 
 import javax.validation.Valid;
@@ -20,7 +20,7 @@ public class RegistrationController {
     @Autowired
     PasswordEncoder encoder;
     @Autowired
-    UserSaveIfNotDuplicate userSaveIfNotDuplicate;
+    UserDetailsServiceImpl userDetailsServiceImpl;
 
     @PostMapping("/api/register")
     public void register(@Valid @RequestBody User user) {
@@ -28,7 +28,7 @@ public class RegistrationController {
 
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRole("ROLE_USER");
-        if (userSaveIfNotDuplicate.saveIfNotDuplicate(user)) {
+        if (userDetailsServiceImpl.saveIfNotDuplicate(user)) {
             throw new ResponseStatusException(HttpStatus.OK);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
