@@ -1,5 +1,6 @@
 package com.example.recipes.api.dtos;
 
+import com.example.recipes.core.entities.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +18,6 @@ public class RecipeResponseDto {
     private String description;
     private List<String> ingredients;
     private List<String> directions;
+    private long userId;
+    private List<Comment> commentList;
 }

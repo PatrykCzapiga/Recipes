@@ -46,4 +46,11 @@ public class Recipe {
     )
     private User user;
 
+    @OneToMany
+    @JoinTable(name = "RECIPECOMMENT",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "commentId")
+    )
+    private List<Comment> commentList;
+
 }

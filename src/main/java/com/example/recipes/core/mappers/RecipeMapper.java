@@ -13,7 +13,7 @@ public class RecipeMapper {
 
     public static Recipe toRecipe(RecipeDto recipeDto, long userId) {
         return new Recipe(recipeDto.getId(), recipeDto.getName(), recipeDto.getCategory(), LocalDateTime.now(), recipeDto.getDescription(),
-                recipeDto.getIngredients(), recipeDto.getDirections(), new User(userId, "", "", ""));
+                recipeDto.getIngredients(), recipeDto.getDirections(), new User(userId, "", "", ""), null);
     }
 
     public static RecipeDto toRecipeDto(Recipe recipe) {
@@ -23,7 +23,7 @@ public class RecipeMapper {
 
     public static RecipeResponseDto toRecipeResponseDto(Recipe recipe) {
         return new RecipeResponseDto(recipe.getName(), recipe.getCategory(), recipe.getDate(), recipe.getDescription(),
-                recipe.getIngredients(), recipe.getDirections());
+                recipe.getIngredients(), recipe.getDirections(), recipe.getUser().getUserId(), recipe.getCommentList());
     }
 
     public static Recipe mapToRecipe(Recipe recipe, Recipe recipe2) {

@@ -24,4 +24,5 @@ public class RecipeDto {
     private List<String> ingredients;
     @NotEmpty
     private List<String> directions;
+
 }
