@@ -19,5 +19,4 @@ public class RecipeResponseDto {
     private List<String> ingredients;
     private List<String> directions;
     private long userId;
-    private List<Comment> commentList;
 }

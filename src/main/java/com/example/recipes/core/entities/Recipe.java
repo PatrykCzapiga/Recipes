@@ -40,17 +40,9 @@ public class Recipe {
     private List<String> directions;
 
     @ManyToOne
-    @JoinTable(name = "USERRECIPE",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "userId")
-    )
+    @JoinColumn(name = "userId")
     private User user;
 
-    @OneToMany
-    @JoinTable(name = "RECIPECOMMENT",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "commentId")
-    )
-    private List<Comment> commentList;
-
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
 }

@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
 @Entity
-@Table(name = "COMMENT")
+@Table(name = "Comment")
 public class Comment {
 
     @Id
@@ -22,10 +23,14 @@ public class Comment {
     @Column
     private String commentText;
 
+    @Column
+    private LocalDateTime date;
+
     @ManyToOne
-    @JoinTable(name = "USERCOMMENT",
-            joinColumns = @JoinColumn(name = "commentId"),
-            inverseJoinColumns = @JoinColumn(name = "userId")
-    )
+    @JoinColumn(name = "userId")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "recipeId")
+    private Recipe recipe;
 }
